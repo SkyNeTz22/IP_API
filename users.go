@@ -100,13 +100,12 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bID, bUsername, bPassword)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bUsername, bPassword)
 	}
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
 	bID := r.FormValue("IDUser")
 	bUsername := r.FormValue("Username")
 	bPassword := r.FormValue("Password")

@@ -107,7 +107,7 @@ func CreateMedic(w http.ResponseWriter, r *http.Request) {
 
 func UpdateMedic(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	updateID := mux.Vars(r)["id"]
+	bID := mux.Vars(r)["id"]
 	bNume := r.FormValue("Nume")
 	bPrenume := r.FormValue("Prenume")
 	bUsername := r.FormValue("Username")
