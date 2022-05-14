@@ -77,7 +77,7 @@ func initializeRouter() {
 	// r.HandleFunc("/api/users", UpdateUser).Methods("PUT")
 	// r.HandleFunc("/api/users/{id}", DeleteUser).Methods("DELETE")
 
-	supervisorHook := r.PathPrefix("/api/supervisors/").Subrouter()
+	supervisorHook := r.PathPrefix("/api/supervisors").Subrouter()
 	supervisorHook.HandleFunc("/", GetSupervisors).Methods("GET")
 	supervisorHook.HandleFunc("/id/{id}/", GetSupervisorByID).Methods("GET")
 	supervisorHook.HandleFunc("/username/{username}/", GetSupervisorByUsername).Methods("GET")
