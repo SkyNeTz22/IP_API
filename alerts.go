@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func GetAlerts(w http.ResponseWriter, _ *http.Request) {
@@ -33,9 +35,8 @@ func GetAlerts(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
-func GetAlert(w http.ResponseWriter, r *http.Request) {
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+func GetAlertByID(w http.ResponseWriter, r *http.Request) {
+	bID := mux.Vars(r)["id"]
 	w.Header().Set("Content-Type", "application/json")
 	selectStringId := ("SELECT * FROM medassist_db.Alerte WHERE IDAlerta = " + bID)
 	rows, err := db.Query(selectStringId)
@@ -64,40 +65,36 @@ func GetAlert(w http.ResponseWriter, r *http.Request) {
 
 func CreateAlert(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDAlerta")
-	bGravitate := parameters.Get("Gravitate")
-	bMesaj := parameters.Get("Mesaj")
-	bIDS := parameters.Get("IDS")
-	insertStringAlerte := fmt.Sprintf("INSERT INTO medassist_db.Alerte (`IDAlerta`, `Gravitate`,`Mesaj`, `IDSender`) VALUES ('%s', '%s', '%s', '%s')", bID, bGravitate, bMesaj, bIDS)
+	bGravitate := r.FormValue("Gravitate")
+	bMesaj := r.FormValue("Mesaj")
+	bIDS := r.FormValue("IDSender")
+	insertStringAlerte := fmt.Sprintf("INSERT INTO medassist_db.Alerte (`Gravitate`,`Mesaj`, `IDSender`) VALUES ('%s', '%s', '%s')", bGravitate, bMesaj, bIDS)
 	_, err := db.Exec(insertStringAlerte)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bID, bGravitate, bMesaj, bIDS)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bGravitate, bMesaj, bIDS)
 	}
 }
 
 func UpdateAlert(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDAlerta")
-	bGravitate := parameters.Get("Gravitate")
-	bMesaj := parameters.Get("Mesaj")
-	bIDS := parameters.Get("IDS")
-	updateStringAlerte := fmt.Sprintf("UPDATE medassist_db.Alerte SET `IDAlerta` = '%s', `Gravitate` = '%s', `Mesaj` = '%s', `IDSender` = '%s' WHERE `IDAlerta` = '%s'", bID, bGravitate, bMesaj, bIDS, bID)
+	bID := mux.Vars(r)["id"]
+	bGravitate := r.FormValue("Gravitate")
+	bMesaj := r.FormValue("Mesaj")
+	bIDS := r.FormValue("IDSender")
+	updateStringAlerte := fmt.Sprintf("UPDATE medassist_db.Alerte SET `Gravitate` = '%s', `Mesaj` = '%s', `IDSender` = '%s' WHERE `IDAlerta` = '%s'", bGravitate, bMesaj, bIDS, bID)
 	_, err := db.Exec(updateStringAlerte)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bID, bGravitate, bMesaj, bIDS)
+		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bGravitate, bMesaj, bIDS)
 	}
 }
 
 func DeleteAlert(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+	bID := mux.Vars(r)["id"]
 	deleteStringAlerte := fmt.Sprintf("DELETE FROM medassist_db.Alerte WHERE `IDAlerta` = '%s'", bID)
 	_, err := db.Exec(deleteStringAlerte)
 	if err != nil {

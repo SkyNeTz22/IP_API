@@ -11,11 +11,18 @@ import (
 func initializeRouter() {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/api/alerts", GetAlerts).Methods("GET")
-	r.HandleFunc("/api/alerts/{id}", GetAlert).Methods("GET")
-	r.HandleFunc("/api/alerts", CreateAlert).Methods("POST")
-	r.HandleFunc("/api/alerts", UpdateAlert).Methods("PUT")
-	r.HandleFunc("/api/alerts/{id}", DeleteAlert).Methods("DELETE")
+	alertHook := r.PathPrefix("/api/alerts").Subrouter()
+	alertHook.HandleFunc("/", GetAlerts).Methods("GET")
+	alertHook.HandleFunc("/id/{id}/", GetAlertByID).Methods("GET")
+	alertHook.HandleFunc("/create/", CreateAlert).Methods("POST")
+	alertHook.HandleFunc("/id/{id}/", UpdateAlert).Methods("PUT")
+	alertHook.HandleFunc("/id/{id}/", DeleteAlert).Methods("DELETE")
+
+	// r.HandleFunc("/api/alerts", GetAlerts).Methods("GET")
+	// r.HandleFunc("/api/alerts/{id}", GetAlertByID).Methods("GET")
+	// r.HandleFunc("/api/alerts", CreateAlert).Methods("POST")
+	// r.HandleFunc("/api/alerts", UpdateAlert).Methods("PUT")
+	// r.HandleFunc("/api/alerts/{id}", DeleteAlert).Methods("DELETE")
 
 	r.HandleFunc("/api/android", GetAllMobileData).Methods("GET")
 	r.HandleFunc("/api/android/{id}", GetMobileData).Methods("GET")
