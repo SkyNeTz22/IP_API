@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func GetMedicalFiles(w http.ResponseWriter, _ *http.Request) {
@@ -33,11 +35,10 @@ func GetMedicalFiles(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
-func GetMedicalFile(w http.ResponseWriter, r *http.Request) {
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+func GetMedicalFileByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	selectStringId := ("SELECT * FROM medassist_db.FisaMed WHERE IDFisa = " + bID)
+	bID := mux.Vars(r)["id"]
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.FisaMed WHERE `IDFisa` = '%s'", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
@@ -64,42 +65,38 @@ func GetMedicalFile(w http.ResponseWriter, r *http.Request) {
 
 func CreateMedicalFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDFisa")
-	bIstoricMedical := parameters.Get("Istoric_Medical")
-	bListaAlergii := parameters.Get("Lista_Alergii")
-	bRecomandari := parameters.Get("Recomandari")
-	bSchemaMedicatie := parameters.Get("Schema_Medicatie")
-	insertStringFisaMed := fmt.Sprintf("INSERT INTO medassist_db.FisaMed (`IDFisa`, `Istoric_Medical`, `Lista_Alergii`, `Recomandari`, `Schema_Medicatie`) VALUES ('%s', '%s', '%s', '%s', '%s')", bID, bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
+	bIstoricMedical := r.FormValue("Istoric_Medical")
+	bListaAlergii := r.FormValue("Lista_Alergii")
+	bRecomandari := r.FormValue("Recomandari")
+	bSchemaMedicatie := r.FormValue("Schema_Medicatie")
+	insertStringFisaMed := fmt.Sprintf("INSERT INTO medassist_db.FisaMed (`Istoric_Medical`, `Lista_Alergii`, `Recomandari`, `Schema_Medicatie`) VALUES ('%s', '%s', '%s', '%s')", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
 	_, err := db.Exec(insertStringFisaMed)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bID, bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
 	}
 }
 
 func UpdateMedicalFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDFisa")
-	bIstoricMedical := parameters.Get("Istoric_Medical")
-	bListaAlergii := parameters.Get("Lista_Alergii")
-	bRecomandari := parameters.Get("Recomandari")
-	bSchemaMedicatie := parameters.Get("Schema_Medicatie")
-	updateStringFisaMed := fmt.Sprintf("UPDATE medassist_db.FisaMed SET `IDFisa` = '%s', `Istoric_Medical` = '%s', `Lista_Alergii` = '%s', `Recomandari` = '%s', `Schema_Medicatie` = '%s' WHERE `IDFisa` = '%s'", bID, bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bID)
+	bID := mux.Vars(r)["id"]
+	bIstoricMedical := r.FormValue("Istoric_Medical")
+	bListaAlergii := r.FormValue("Lista_Alergii")
+	bRecomandari := r.FormValue("Recomandari")
+	bSchemaMedicatie := r.FormValue("Schema_Medicatie")
+	updateStringFisaMed := fmt.Sprintf("UPDATE medassist_db.FisaMed SET `Istoric_Medical` = '%s', `Lista_Alergii` = '%s', `Recomandari` = '%s', `Schema_Medicatie` = '%s' WHERE `IDFisa` = '%s'", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bID)
 	_, err := db.Exec(updateStringFisaMed)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bID, bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
+		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s', '%s' pentru campul cu ID : '%s'", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bID))
 	}
 }
 
 func DeleteMedicalFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+	bID := mux.Vars(r)["id"]
 	deleteStringFisaMed := fmt.Sprintf("DELETE FROM medassist_db.FisaMed WHERE `IDFisa` = '%s'", bID)
 	_, err := db.Exec(deleteStringFisaMed)
 	if err != nil {
