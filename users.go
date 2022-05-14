@@ -93,8 +93,8 @@ func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	bUsername := r.FormValue["Username"]
-	bPassword := r.FormValue["Password"]
+	bUsername := r.FormValue("Username")
+	bPassword := r.FormValue("Password")
 	insertStringUsers := fmt.Sprintf("INSERT INTO medassist_db.Users (`Username`, `Password`) VALUES ('%s', '%s')", bUsername, bPassword)
 	_, err := db.Exec(insertStringUsers)
 	if err != nil {
@@ -107,8 +107,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := r.FormValue("id")
-	bUsername := r.FormValue["Username"]
-	bPassword := r.FormValue["Password"]
+	bUsername := r.FormValue("Username")
+	bPassword := r.FormValue("Password")
 	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `Username` = '%s', `Password` = '%s' WHERE `IDUser` = '%s'", bUsername, bPassword, bID)
 	_, err := db.Exec(updateStringUsers)
 	if err != nil {
