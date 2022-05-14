@@ -36,8 +36,8 @@ func GetMedics(w http.ResponseWriter, _ *http.Request) {
 }
 
 func GetMedicByID(w http.ResponseWriter, r *http.Request) {
-	bID := mux.Vars(r)["id"]
 	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
 	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Medici WHERE `IDMedic` = '%s'", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
