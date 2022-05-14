@@ -62,11 +62,11 @@ type Pacienti struct {
 	Mail            string `json:"Mail"`
 	Profesia        string `json:"Profesia"`
 	LocDeMunca      string `json:"LocDeMunca"`
+	Username        string `json:"Username"`
 	IDMedic         int    `json:"IDMedic"`
 	IDIngrijitor    int    `json:"IDIngrijitor"`
 	IDSupraveghetor int    `json:"IDSupraveghetor"`
 	IDFisa          int    `json:"IDFisa"`
-	Username        string `json:"Username"`
 }
 
 type Users struct {
