@@ -66,7 +66,7 @@ func GetCaretakerByID(w http.ResponseWriter, r *http.Request) {
 func GetCaretakerByUsername(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bUsername := mux.Vars(r)["username"]
-	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Ingrijitori WHERE IDIngrijitor = '%s'", bUsername)
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Ingrijitori WHERE Username = '%s'", bUsername)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
