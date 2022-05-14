@@ -66,7 +66,7 @@ func GetSupervisorByID(w http.ResponseWriter, r *http.Request) {
 func GetSupervisorByUsername(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bUsername := mux.Vars(r)["username"]
-	selectStringUsername := fmt.Sprintf("SELECT * FROM medassist_db.Medici WHERE `Username` = '%s'", bUsername)
+	selectStringUsername := fmt.Sprintf("SELECT * FROM medassist_db.Supraveghetori WHERE `Username` = '%s'", bUsername)
 	rows, err := db.Query(selectStringUsername)
 	if err != nil {
 		panic(err)
@@ -96,7 +96,7 @@ func CreateSupervisor(w http.ResponseWriter, r *http.Request) {
 	bNume := r.FormValue("Nume")
 	bPrenume := r.FormValue("Prenume")
 	bUsername := r.FormValue("Username")
-	insertStringSupraveghetori := fmt.Sprintf("INSERT INTO medassist_db.Supraveghetori (`Nume`,`Prenume`, `Username`) VALUES ('%s', '%s', '%s')", bNume, bPrenume, bUsername)
+	insertStringSupraveghetori := fmt.Sprintf("INSERT INTO medassist_db.Supraveghetori (`Nume`, `Prenume`, `Username`) VALUES ('%s', '%s', '%s')", bNume, bPrenume, bUsername)
 	_, err := db.Exec(insertStringSupraveghetori)
 	if err != nil {
 		panic(err)
@@ -111,7 +111,7 @@ func UpdateSupervisor(w http.ResponseWriter, r *http.Request) {
 	bNume := r.FormValue("Nume")
 	bPrenume := r.FormValue("Prenume")
 	bUsername := r.FormValue("Username")
-	updateStringSupraveghetori := fmt.Sprintf("UPDATE medassist_db.Supraveghetori SET `Nume` = '%s', `Prenume` = '%s' WHERE `IDSupraveghetor` = '%s'", bNume, bPrenume, bUsername, bID)
+	updateStringSupraveghetori := fmt.Sprintf("UPDATE medassist_db.Supraveghetori SET `Nume` = '%s', `Prenume` = '%s', `Username` = '%s' WHERE `IDSupraveghetor` = '%s'", bNume, bPrenume, bUsername, bID)
 	_, err := db.Exec(updateStringSupraveghetori)
 	if err != nil {
 		panic(err)
