@@ -1,0 +1,9 @@
+{
+    "mySql": {
+        "username":     "dbuser",
+        "password":     "parolasql2",
+        "net":          "tcp",
+        "hostName":     "185.207.251.196:3306",
+        "dbName":       "medassist_db"
+    }
+}
