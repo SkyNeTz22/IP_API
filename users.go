@@ -38,7 +38,7 @@ func GetUsers(w http.ResponseWriter, _ *http.Request) {
 func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	bID := mux.Vars(r)["id"]
 	w.Header().Set("Content-Type", "application/json")
-	selectStringId := ("SELECT * FROM medassist_db.Users WHERE `IDUser` = '%s'", bID)
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Users WHERE `IDUser` = '%s'", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
