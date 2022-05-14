@@ -77,11 +77,19 @@ func initializeRouter() {
 	// r.HandleFunc("/api/users", UpdateUser).Methods("PUT")
 	// r.HandleFunc("/api/users/{id}", DeleteUser).Methods("DELETE")
 
-	r.HandleFunc("/api/supervisors", GetSupervisors).Methods("GET")
-	r.HandleFunc("/api/supervisors/{id}", GetSupervisor).Methods("GET")
-	r.HandleFunc("/api/supervisors", CreateSupervisor).Methods("POST")
-	r.HandleFunc("/api/supervisors", UpdateSupervisor).Methods("PUT")
-	r.HandleFunc("/api/supervisors/{id}", DeleteSupervisor).Methods("DELETE")
+	supervisorHook := r.PathPrefix("/api/supervisors/").Subrouter()
+	supervisorHook.HandleFunc("/", GetSupervisors).Methods("GET")
+	supervisorHook.HandleFunc("/id/{id}/", GetSupervisorByID).Methods("GET")
+	supervisorHook.HandleFunc("/username/{username}/", GetSupervisorByUsername).Methods("GET")
+	supervisorHook.HandleFunc("/create/", CreateSupervisor).Methods("POST")
+	supervisorHook.HandleFunc("/id/{id}/", UpdateSupervisor).Methods("PUT")
+	supervisorHook.HandleFunc("/id/{id}/", DeleteSupervisor).Methods("DELETE")
+
+	// r.HandleFunc("/api/supervisors", GetSupervisors).Methods("GET")
+	// r.HandleFunc("/api/supervisors/{id}", GetSupervisor).Methods("GET")
+	// r.HandleFunc("/api/supervisors", CreateSupervisor).Methods("POST")
+	// r.HandleFunc("/api/supervisors", UpdateSupervisor).Methods("PUT")
+	// r.HandleFunc("/api/supervisors/{id}", DeleteSupervisor).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":9000",
 		handlers.CORS(handlers.AllowedHeaders([]string{

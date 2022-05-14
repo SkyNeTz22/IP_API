@@ -5,6 +5,7 @@ type Alerte struct {
 	Gravitate int    `json:"Gravitate"`
 	Mesaj     string `json:"Mesaj"`
 	IDSender  int    `json:"IDSender"`
+	Username  string `json:"Username"`
 }
 
 type DateMobile struct {
@@ -41,6 +42,7 @@ type Ingrijitori struct {
 	IDIngrijitor int    `json:"IDIngrijitor"`
 	Nume         string `json:"Nume"` // var Nume -> Type String -> Value of Key "Nume" ; "Nume": "Cutarescu"
 	Prenume      string `json:"Prenume"`
+	Username     string `json:"Username"`
 }
 
 type Medici struct {
@@ -64,6 +66,7 @@ type Pacienti struct {
 	IDIngrijitor    int    `json:"IDIngrijitor"`
 	IDSupraveghetor int    `json:"IDSupraveghetor"`
 	IDFisa          int    `json:"IDFisa"`
+	Username        string `json:"Username"`
 }
 
 type Users struct {
@@ -76,4 +79,5 @@ type Supraveghetori struct {
 	IDSupraveghetor int    `json:"IDSupraveghetor"`
 	Nume            string `json:"Nume"` // var Nume -> Type String -> Value of Key "Nume" ; "Nume": "Cutarescu"
 	Prenume         string `json:"Prenume"`
+	Username        string `json:"Username"`
 }
