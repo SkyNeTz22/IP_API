@@ -24,7 +24,7 @@ func initializeRouter() {
 	// r.HandleFunc("/api/alerts", UpdateAlert).Methods("PUT")
 	// r.HandleFunc("/api/alerts/{id}", DeleteAlert).Methods("DELETE")
 
-	androidHook := r.PathPrefix("/api/alerts").Subrouter()
+	androidHook := r.PathPrefix("/api/android").Subrouter()
 	androidHook.HandleFunc("/", GetAllMobileData).Methods("GET")
 	androidHook.HandleFunc("/id/{id}/", GetMobileDataByID).Methods("GET")
 	androidHook.HandleFunc("/create/", InsertMobileData).Methods("POST")
