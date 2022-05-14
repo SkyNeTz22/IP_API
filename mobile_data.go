@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func GetAllMobileData(w http.ResponseWriter, _ *http.Request) {
@@ -33,11 +35,10 @@ func GetAllMobileData(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
-func GetMobileData(w http.ResponseWriter, r *http.Request) {
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+func GetMobileDataByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	selectStringId := ("SELECT * FROM medassist_db.DateMobile WHERE IDSenzor = " + bID)
+	bID := mux.Vars(r)["id"]
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateMobile WHERE `IDDate` = '%s'", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
@@ -64,48 +65,44 @@ func GetMobileData(w http.ResponseWriter, r *http.Request) {
 
 func InsertMobileData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDDate")
-	bData := parameters.Get("Data")
-	bGreutate := parameters.Get("Greutate")
-	bGlicemie := parameters.Get("Glicemie")
-	bTensiuneMica := parameters.Get("Tensiune_Mica")
-	bTensiuneMare := parameters.Get("Tensiune_Mare")
-	bTemperatura := parameters.Get("Temperatura")
-	bIDP := parameters.Get("IDPacient")
-	insertStringDateMobile := fmt.Sprintf("INSERT INTO medassist_db.DateMobile (`IDDate`, `Data`, `Greutate`, `Glicemie`, `Tensiune_Mica`, `Tensiune_Mare`, `Temperatura`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", bID, bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP)
+	bData := r.FormValue("Data")
+	bGreutate := r.FormValue("Greutate")
+	bGlicemie := r.FormValue("Glicemie")
+	bTensiuneMica := r.FormValue("Tensiune_Mica")
+	bTensiuneMare := r.FormValue("Tensiune_Mare")
+	bTemperatura := r.FormValue("Temperatura")
+	bIDP := r.FormValue("IDPacient")
+	insertStringDateMobile := fmt.Sprintf("INSERT INTO medassist_db.DateMobile (`Data`, `Greutate`, `Glicemie`, `Tensiune_Mica`, `Tensiune_Mare`, `Temperatura`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP)
 	_, err := db.Exec(insertStringDateMobile)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bID, bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP)
 	}
 }
 
 func UpdateMobileData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDDate")
-	bData := parameters.Get("Data")
-	bGreutate := parameters.Get("Greutate")
-	bGlicemie := parameters.Get("Glicemie")
-	bTensiuneMica := parameters.Get("Tensiune_Mica")
-	bTensiuneMare := parameters.Get("Tensiune_Mare")
-	bTemperatura := parameters.Get("Temperatura")
-	bIDP := parameters.Get("IDPacient")
-	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `IDDate` = '%s', `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune_Mica` = '%s', `Tensiune_Mare` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bID, bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP, bID)
+	bID := mux.Vars(r)["id"]
+	bData := r.FormValue("Data")
+	bGreutate := r.FormValue("Greutate")
+	bGlicemie := r.FormValue("Glicemie")
+	bTensiuneMica := r.FormValue("Tensiune_Mica")
+	bTensiuneMare := r.FormValue("Tensiune_Mare")
+	bTemperatura := r.FormValue("Temperatura")
+	bIDP := r.FormValue("IDPacient")
+	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune_Mica` = '%s', `Tensiune_Mare` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP, bID)
 	_, err := db.Exec(updateStringDateMobile)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bID, bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP)
+		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP)
 	}
 }
 
 func DeleteMobileData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+	bID := mux.Vars(r)["id"]
 	deleteStringDateMobile := fmt.Sprintf("DELETE FROM medassist_db.DateMobile WHERE `IDDate` = '%s'", bID)
 	_, err := db.Exec(deleteStringDateMobile)
 	if err != nil {

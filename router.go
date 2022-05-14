@@ -24,11 +24,18 @@ func initializeRouter() {
 	// r.HandleFunc("/api/alerts", UpdateAlert).Methods("PUT")
 	// r.HandleFunc("/api/alerts/{id}", DeleteAlert).Methods("DELETE")
 
-	r.HandleFunc("/api/android", GetAllMobileData).Methods("GET")
-	r.HandleFunc("/api/android/{id}", GetMobileData).Methods("GET")
-	r.HandleFunc("/api/android", InsertMobileData).Methods("POST")
-	r.HandleFunc("/api/android", UpdateMobileData).Methods("PUT")
-	r.HandleFunc("/api/android/{id}", DeleteMobileData).Methods("DELETE")
+	androidHook := r.PathPrefix("/api/alerts").Subrouter()
+	androidHook.HandleFunc("/", GetAllMobileData).Methods("GET")
+	androidHook.HandleFunc("/id/{id}/", GetMobileDataByID).Methods("GET")
+	androidHook.HandleFunc("/create/", InsertMobileData).Methods("POST")
+	androidHook.HandleFunc("/id/{id}/", UpdateMobileData).Methods("PUT")
+	androidHook.HandleFunc("/id/{id}/", DeleteMobileData).Methods("DELETE")
+
+	// r.HandleFunc("/api/android", GetAllMobileData).Methods("GET")
+	// r.HandleFunc("/api/android/{id}", GetMobileData).Methods("GET")
+	// r.HandleFunc("/api/android", InsertMobileData).Methods("POST")
+	// r.HandleFunc("/api/android", UpdateMobileData).Methods("PUT")
+	// r.HandleFunc("/api/android/{id}", DeleteMobileData).Methods("DELETE")
 
 	caretakerHook := r.PathPrefix("/api/caretakers").Subrouter()
 	caretakerHook.HandleFunc("/", GetCaretakers).Methods("GET")
