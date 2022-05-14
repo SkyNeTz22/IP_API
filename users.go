@@ -38,7 +38,7 @@ func GetUsers(w http.ResponseWriter, _ *http.Request) {
 func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	bID := mux.Vars(r)["id"]
 	w.Header().Set("Content-Type", "application/json")
-	selectStringId := ("SELECT * FROM medassist_db.Users WHERE IDUser = " + bID)
+	selectStringId := ("SELECT * FROM medassist_db.Users WHERE `IDUser` = '%s'", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
@@ -66,7 +66,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bUsername := mux.Vars(r)["username"]
-	selectStringUsername := ("SELECT * FROM medassist_db.Users WHERE Username = \"" + bUsername + "\"")
+	selectStringUsername := ("SELECT * FROM medassist_db.Users WHERE `Usernam`e = \"'%s'\"", bUsername)
 	rows, err := db.Query(selectStringUsername)
 	if err != nil {
 		panic(err)
@@ -93,11 +93,9 @@ func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDUser")
-	bUsername := parameters.Get("Username")
-	bPassword := parameters.Get("Password")
-	insertStringUsers := fmt.Sprintf("INSERT INTO medassist_db.Users (`IDUser`, `Username`, `Password`) VALUES ('%s', '%s', '%s')", bID, bUsername, bPassword)
+	bUsername := r.FormValue("Username")
+	bPassword := r.FormValue("Password")
+	insertStringUsers := fmt.Sprintf("INSERT INTO medassist_db.Users (`Username`, `Password`) VALUES ('%s', '%s')", bUsername, bPassword)
 	_, err := db.Exec(insertStringUsers)
 	if err != nil {
 		panic(err)
@@ -109,10 +107,10 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	parameters := r.URL.Query()
-	bID := parameters.Get("IDUser")
-	bUsername := parameters.Get("Username")
-	bPassword := parameters.Get("Password")
-	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `IDUser` = '%s', `Username` = '%s', `Password` = '%s' WHERE `IDUser` = '%s'", bID, bUsername, bPassword, bID)
+	bID := r.FormValue("IDUser")
+	bUsername := r.FormValue("Username")
+	bPassword := r.FormValue("Password")
+	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `Username` = '%s', `Password` = '%s' WHERE `IDUser` = '%s'", bUsername, bPassword, bID)
 	_, err := db.Exec(updateStringUsers)
 	if err != nil {
 		panic(err)
@@ -123,8 +121,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+	bID := mux.Vars(r)["id"]
 	deleteStringUsers := fmt.Sprintf("DELETE FROM medassist_db.Users WHERE `IDUser` = '%s'", bID)
 	_, err := db.Exec(deleteStringUsers)
 	if err != nil {

@@ -63,19 +63,19 @@ func initializeRouter() {
 	r.HandleFunc("/api/sensors/{id}", DeleteSensorData).Methods("DELETE")
 
 	userHook := r.PathPrefix("/api/users").Subrouter()
-	// "/products/"
 	userHook.HandleFunc("/", GetUsers).Methods("GET")
-	// "/products/{key}/"
 	userHook.HandleFunc("/id/{id}/", GetUserByID).Methods("GET")
-	// "/products/{key}/details"
 	userHook.HandleFunc("/username/{username}/", GetUserByUsername).Methods("GET")
+	userHook.HandleFunc("/create/", Createuser).Methods("POST")
+	userHook.HandleFunc("/id/{id}/", UpdateUser).Methods("PUT")
+	userHook.HandleFunc("/id/{id}/", DeleteUser).Methods("DELETE")
 
-	r.HandleFunc("/api/users", GetUsers).Methods("GET")
-	r.HandleFunc("/api/users/id", GetUserByID).Methods("GET")
-	r.HandleFunc("/api/users/username", GetUserByUsername).Methods("GET")
-	r.HandleFunc("/api/users", CreateUser).Methods("POST")
-	r.HandleFunc("/api/users", UpdateUser).Methods("PUT")
-	r.HandleFunc("/api/users/{id}", DeleteUser).Methods("DELETE")
+	// r.HandleFunc("/api/users", GetUsers).Methods("GET")
+	// r.HandleFunc("/api/users/id", GetUserByID).Methods("GET")
+	// r.HandleFunc("/api/users/username", GetUserByUsername).Methods("GET")
+	// r.HandleFunc("/api/users", CreateUser).Methods("POST")
+	// r.HandleFunc("/api/users", UpdateUser).Methods("PUT")
+	// r.HandleFunc("/api/users/{id}", DeleteUser).Methods("DELETE")
 
 	r.HandleFunc("/api/supervisors", GetSupervisors).Methods("GET")
 	r.HandleFunc("/api/supervisors/{id}", GetSupervisor).Methods("GET")
