@@ -46,7 +46,7 @@ func GetSupervisorByID(w http.ResponseWriter, r *http.Request) {
 	var elements []Supraveghetori
 	for rows.Next() {
 		var elem Supraveghetori
-		if err := rows.Scan(&elem.IDSupraveghetor, &elem.Nume, &elem.Prenume); err != nil {
+		if err := rows.Scan(&elem.IDSupraveghetor, &elem.Nume, &elem.Prenume, &elem.Username); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
