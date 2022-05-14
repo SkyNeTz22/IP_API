@@ -109,7 +109,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	bID := r.FormValue("id")
 	bUsername := r.FormValue("Username")
 	bPassword := r.FormValue("Password")
-	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `Username` = '%s', `Password` = '%s' WHERE `IDUser` = '%s'", bUsername, bPassword, bID)
+	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `IDUser` = '%s', `Username` = '%s', `Password` = '%s' WHERE IDUser = '%s'", bID, bUsername, bPassword, bID)
 	_, err := db.Exec(updateStringUsers)
 	if err != nil {
 		panic(err)
