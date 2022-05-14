@@ -93,7 +93,7 @@ func GetPatientByUsername(w http.ResponseWriter, r *http.Request) {
 
 func CreatePatient(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	bNume := r.FormValue("")
+	bNume := r.FormValue("Nume")
 	bPrenume := r.FormValue("Prenume")
 	bVarsta := r.FormValue("Varsta")
 	bAdresa := r.FormValue("Adresa")
@@ -118,7 +118,7 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 func UpdatePatient(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
-	bNume := r.FormValue("")
+	bNume := r.FormValue("Nume")
 	bPrenume := r.FormValue("Prenume")
 	bVarsta := r.FormValue("Varsta")
 	bAdresa := r.FormValue("Adresa")
