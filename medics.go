@@ -116,7 +116,7 @@ func UpdateMedic(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bID, bNume, bPrenume, bUsername)
+		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s', '%s' pentru campul cu ID : '%s'", bNume, bPrenume, bUsername, bID))
 	}
 }
 

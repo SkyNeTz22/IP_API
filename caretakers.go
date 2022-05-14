@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func GetCaretakers(w http.ResponseWriter, _ *http.Request) {
@@ -16,7 +18,7 @@ func GetCaretakers(w http.ResponseWriter, _ *http.Request) {
 	var elements []Ingrijitori
 	for rows.Next() {
 		var elem Ingrijitori
-		if err := rows.Scan(&elem.IDIngrijitor, &elem.Nume, &elem.Prenume); err != nil {
+		if err := rows.Scan(&elem.IDIngrijitor, &elem.Nume, &elem.Prenume, &elem.Username); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -33,11 +35,10 @@ func GetCaretakers(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
-func GetCaretaker(w http.ResponseWriter, r *http.Request) {
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+func GetCaretakerByID(w http.ResponseWriter, r *http.Request) {
+	bID := mux.Vars(r)["id"]
 	w.Header().Set("Content-Type", "application/json")
-	selectStringId := ("SELECT * FROM medassist_db.Ingrijitori WHERE IDIngrijitor = " + bID)
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Ingrijitori WHERE IDIngrijitor = '%s'", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
@@ -45,7 +46,35 @@ func GetCaretaker(w http.ResponseWriter, r *http.Request) {
 	var elements []Ingrijitori
 	for rows.Next() {
 		var elem Ingrijitori
-		if err := rows.Scan(&elem.IDIngrijitor, &elem.Nume, &elem.Prenume); err != nil {
+		if err := rows.Scan(&elem.IDIngrijitor, &elem.Nume, &elem.Prenume, &elem.Username); err != nil {
+			w.Write([]byte("A intrat pe if"))
+		}
+		elements = append(elements, elem)
+	}
+	if err = rows.Err(); err != nil {
+		w.Write([]byte("A intrat pe if"))
+	}
+
+	encoded, err := json.Marshal(elements)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
+func GetCaretakerByUsername(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bUsername := mux.Vars(r)["username"]
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Ingrijitori WHERE IDIngrijitor = '%s'", bUsername)
+	rows, err := db.Query(selectStringId)
+	if err != nil {
+		panic(err)
+	}
+	var elements []Ingrijitori
+	for rows.Next() {
+		var elem Ingrijitori
+		if err := rows.Scan(&elem.IDIngrijitor, &elem.Nume, &elem.Prenume, &elem.Username); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -64,38 +93,36 @@ func GetCaretaker(w http.ResponseWriter, r *http.Request) {
 
 func CreateCaretaker(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDIngrijitor")
-	bNume := parameters.Get("Nume")
-	bPrenume := parameters.Get("Prenume")
-	insertStringIngrijitori := fmt.Sprintf("INSERT INTO medassist_db.Ingrijitori (`IDIngrijitor`, `Nume`,`Prenume`) VALUES ('%s', '%s', '%s')", bID, bNume, bPrenume)
+	bNume := r.FormValue("Nume")
+	bPrenume := r.FormValue("Prenume")
+	bUsername := r.FormValue("Username")
+	insertStringIngrijitori := fmt.Sprintf("INSERT INTO medassist_db.Ingrijitori (`Nume`, `Prenume`, `Username`) VALUES ('%s', '%s', '%s')", bNume, bPrenume, bUsername)
 	_, err := db.Exec(insertStringIngrijitori)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bID, bNume, bPrenume)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bNume, bPrenume, bUsername)
 	}
 }
 
 func UpdateCaretaker(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	parameters := r.URL.Query()
-	bID := parameters.Get("IDIngrijitor")
-	bNume := parameters.Get("Nume")
-	bPrenume := parameters.Get("Prenume")
-	updateStringIngrijitori := fmt.Sprintf("UPDATE medassist_db.Ingrijitori SET `IDIngrijitor` = '%s', `Nume` = '%s', `Prenume` = '%s' WHERE `IDIngrijitor` = '%s'", bID, bNume, bPrenume, bID)
+	bID := mux.Vars(r)["id"]
+	bNume := r.FormValue("Nume")
+	bPrenume := r.FormValue("Prenume")
+	bUsername := r.FormValue("Username")
+	updateStringIngrijitori := fmt.Sprintf("UPDATE medassist_db.Ingrijitori SET `Nume` = '%s', `Prenume` = '%s', `Username` = '%s' WHERE `IDIngrijitor` = '%s'", bNume, bPrenume, bUsername, bID)
 	_, err := db.Exec(updateStringIngrijitori)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bID, bNume, bPrenume)
+		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s', '%s' pentru campul cu ID : '%s'", bNume, bPrenume, bUsername, bID))
 	}
 }
 
 func DeleteCaretaker(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	urlString := r.URL.String()
-	bID := urlString[len(urlString)-1:]
+	bID := mux.Vars(r)["id"]
 	deleteStringIngrijitori := fmt.Sprintf("DELETE FROM medassist_db.Ingrijitori WHERE `IDIngrijitor` = '%s'", bID)
 	_, err := db.Exec(deleteStringIngrijitori)
 	if err != nil {
