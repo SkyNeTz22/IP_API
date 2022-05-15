@@ -74,7 +74,7 @@ func GetSenderByUsername(w http.ResponseWriter, r *http.Request) {
 	var elements []Senders
 	for rows.Next() {
 		var elem Senders
-		if err := rows.Scan(&elem.IDSender, &elem.Username, &elem.Type)); err != nil {
+		if err := rows.Scan(&elem.IDSender, &elem.Username, &elem.Type); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
