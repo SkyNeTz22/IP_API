@@ -121,7 +121,7 @@ func UpdateSender(w http.ResponseWriter, r *http.Request) {
 func DeleteSender(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
-	deleteStringSenders := fmt.Sprintf("DELETE FROM medassist_db.Senders WHERE `IDUser` = '%s'", bID)
+	deleteStringSenders := fmt.Sprintf("DELETE FROM medassist_db.Senders WHERE `IDSender` = '%s'", bID)
 	_, err := db.Exec(deleteStringSenders)
 	if err != nil {
 		panic(err)
