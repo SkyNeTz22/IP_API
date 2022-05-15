@@ -64,7 +64,7 @@ func initializeRouter() {
 	// r.HandleFunc("/api/medicalfile", UpdateMedicalFile).Methods("PUT")
 	// r.HandleFunc("/api/medicalfile/{id}", DeleteMedicalFile).Methods("DELETE")
 
-	medicHook := r.PathPrefix("/api/medics").Subrouter()
+	medicHook := r.PathPrefix("/api/medic").Subrouter()
 	medicHook.HandleFunc("/", GetMedics).Methods("GET")
 	medicHook.HandleFunc("/id/{id}/", GetMedicByID).Methods("GET")
 	medicHook.HandleFunc("/username/{username}/", GetMedicByUsername).Methods("GET")
