@@ -135,6 +135,14 @@ func initializeRouter() {
 	// r.HandleFunc("/api/supervisors", UpdateSupervisor).Methods("PUT")
 	// r.HandleFunc("/api/supervisors/{id}", DeleteSupervisor).Methods("DELETE")
 
+	senderHook := r.PathPrefix("/api/senders").Subrouter()
+	senderHook.HandleFunc("/", GetSenders).Methods("GET")
+	senderHook.HandleFunc("/id/{id}/", GetSenderByID).Methods("GET")
+	senderHook.HandleFunc("/username/{username}/", GetSenderByUsername).Methods("GET")
+	senderHook.HandleFunc("/create/", CreateSender).Methods("POST")
+	senderHook.HandleFunc("/id/{id}/", UpdateSender).Methods("PUT")
+	senderHook.HandleFunc("/id/{id}/", DeleteSender).Methods("DELETE")
+
 	log.Fatal(http.ListenAndServe(":9000",
 		handlers.CORS(handlers.AllowedHeaders([]string{
 			"X-Requested-With",
