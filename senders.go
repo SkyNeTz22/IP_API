@@ -35,7 +35,7 @@ func GetSenders(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
-func GetUserByID(w http.ResponseWriter, r *http.Request) {
+func GetSenderByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
 	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Senders WHERE `IDSender` = '%s'", bID)
@@ -63,7 +63,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
-func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
+func GetSenderByUsername(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bUsername := mux.Vars(r)["username"]
 	selectStringUsername := fmt.Sprintf("SELECT * FROM medassist_db.Senders WHERE `Username` = '%s'", bUsername)
@@ -91,7 +91,7 @@ func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+func CreateSender(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bUsername := r.FormValue("Username")
 	bType := r.FormValue("Type")
@@ -104,7 +104,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func UpdateUser(w http.ResponseWriter, r *http.Request) {
+func UpdateSender(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
 	bUsername := r.FormValue("Username")
@@ -118,7 +118,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func DeleteUser(w http.ResponseWriter, r *http.Request) {
+func DeleteSender(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
 	deleteStringSenders := fmt.Sprintf("DELETE FROM medassist_db.Senders WHERE `IDUser` = '%s'", bID)
