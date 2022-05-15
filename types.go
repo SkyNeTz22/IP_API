@@ -74,6 +74,12 @@ type Users struct {
 	Password string `json:"Password"`
 }
 
+type Senders struct {
+	IDSender int    `json:"IDSender"`
+	Username string `json:"Username"`
+	Type     string `json:"Type"`
+}
+
 type Supraveghetori struct {
 	IDSupraveghetor int    `json:"IDSupraveghetor"`
 	Nume            string `json:"Nume"` // var Nume -> Type String -> Value of Key "Nume" ; "Nume": "Cutarescu"
