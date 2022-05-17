@@ -1,0 +1,2345 @@
+{
+	"info": {
+		"_postman_id": "765686c8-f885-4ad0-811d-f2d3f33dc795",
+		"name": "IP API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Alerts",
+			"item": [
+				{
+					"name": "Select All Alerts",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/alerts/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"alerts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Alert By ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/alerts/id/3/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"alerts",
+								"id",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Alert Row",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Gravitate",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Mesaj",
+									"value": "Glicemie mica",
+									"type": "text"
+								},
+								{
+									"key": "IDSender",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/alerts/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"alerts",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update An Alert's Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Gravitate",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Mesaj",
+									"value": "E  pe duca si mai rau ca ceilalti 3",
+									"type": "text"
+								},
+								{
+									"key": "IDSender",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/alerts/id/4/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"alerts",
+								"id",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete An Alert Row",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/alerts/id/4/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"alerts",
+								"id",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Caretakers",
+			"item": [
+				{
+					"name": "Select All Caretakers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/caretakers/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"caretakers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Caretaker By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/caretakers/id/4/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"caretakers",
+								"id",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Caretaker By Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/caretakers/username/yes5/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"caretakers",
+								"username",
+								"yes5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Caretaker Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Popescu",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Ana",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "popescu",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/caretakers/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"caretakers",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Caretaker's Data Row",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Gheorghe",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Vasile",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "yes5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/caretakers/id/5/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"caretakers",
+								"id",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Caretaker Row",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/caretakers/id/5/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"caretakers",
+								"id",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "parolasql2",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "dbuser",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Medical File",
+			"item": [
+				{
+					"name": "Select Medical Files",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medicalfile/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medicalfile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Medical File By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medicalfile/id/6/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medicalfile",
+								"id",
+								"6",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Medical File Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Istoric_Medical",
+									"value": "Nu are",
+									"type": "text"
+								},
+								{
+									"key": "Lista_Alergii",
+									"value": "Praf",
+									"type": "text"
+								},
+								{
+									"key": "Recomandari",
+									"value": "Sa se protejeze",
+									"type": "text"
+								},
+								{
+									"key": "Schema_Medicatie",
+									"value": "Paracetamol",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medicalfile/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medicalfile",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Medical File's Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medicalfile/id/6/?Istoric_Medical=Ce-i aia?&Lista_Alergii=Fotbalul&Recomandari=Sa tina cu Steaua daca nu vrea bataie&Schema_Medicatie=NIci la dansul nu vreti sa stiti..",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medicalfile",
+								"id",
+								"6",
+								""
+							],
+							"query": [
+								{
+									"key": "Istoric_Medical",
+									"value": "Ce-i aia?"
+								},
+								{
+									"key": "Lista_Alergii",
+									"value": "Fotbalul"
+								},
+								{
+									"key": "Recomandari",
+									"value": "Sa tina cu Steaua daca nu vrea bataie"
+								},
+								{
+									"key": "Schema_Medicatie",
+									"value": "NIci la dansul nu vreti sa stiti.."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Medical File Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medicalfile/id/7/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medicalfile",
+								"id",
+								"7",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medic",
+			"item": [
+				{
+					"name": "Select All Medic",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql21",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medic/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medic",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Medic By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medic/id/1/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medic",
+								"id",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Medic by Username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medic/username/Popescu/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medic",
+								"username",
+								"Popescu",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Medic Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Ionescu",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Gabriel",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "ionescu",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medic/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medic",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Medic's Data",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Gheorghe",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Vasile",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medic/id/6/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medic",
+								"id",
+								"6",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Medic Row",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/medic/id/6/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"medic",
+								"id",
+								"6",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mobile Data",
+			"item": [
+				{
+					"name": "Select All Mobile Data",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/android/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"android",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Mobile Data By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/android/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"android",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Mobile Data Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Data",
+									"value": "1000-01-01 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "Greutate",
+									"value": "60",
+									"type": "text"
+								},
+								{
+									"key": "Glicemie",
+									"value": "60",
+									"type": "text"
+								},
+								{
+									"key": "Tensiune_Mica",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "Tensiune_Mare",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "Temperatura",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "IDPacient",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/android/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"android",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mobile Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Data",
+									"value": "1000-01-01 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "Greutate",
+									"value": "60",
+									"type": "text"
+								},
+								{
+									"key": "Glicemie",
+									"value": "60",
+									"type": "text"
+								},
+								{
+									"key": "Tensiune_Mica",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "Tensiune_Mare",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "Temperatura",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "IDPacient",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/android/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"android",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Mobile Data Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/android/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"android",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Select All Patients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Patient By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/id/4/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								"id",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Patient By Medic ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/idmedic/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								"idmedic",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Patient By Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/username/Yes3/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								"username",
+								"Yes3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patient Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Stanescu",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Paul",
+									"type": "text"
+								},
+								{
+									"key": "Varsta",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "Adresa",
+									"value": "Timisoara",
+									"type": "text"
+								},
+								{
+									"key": "NrTel",
+									"value": "752359305",
+									"type": "text"
+								},
+								{
+									"key": "Mail",
+									"value": "paul@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "Profesia",
+									"value": "Avocat",
+									"type": "text"
+								},
+								{
+									"key": "LocDeMunca",
+									"value": "LawOne",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "paul_stan",
+									"type": "text"
+								},
+								{
+									"key": "IDMedic",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "IDIngrijitor",
+									"value": "1"
+								},
+								{
+									"key": "IDSupraveghetor",
+									"value": "1"
+								},
+								{
+									"key": "IDFisa",
+									"value": "1"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Patient's Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Gheorghe",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Vasilescu",
+									"type": "text"
+								},
+								{
+									"key": "Varsta",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "Adresa",
+									"value": "N-avem",
+									"type": "text"
+								},
+								{
+									"key": "NrTel",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "Mail",
+									"value": "Nu mai am abonament",
+									"type": "text"
+								},
+								{
+									"key": "Profesia",
+									"value": "Om de afaceri la colt de strada",
+									"type": "text"
+								},
+								{
+									"key": "LocDeMunca",
+									"value": "Biroul 5 Strada Canalului",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "Yes3",
+									"type": "text"
+								},
+								{
+									"key": "IDMedic",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "IDIngrijitor",
+									"value": "1"
+								},
+								{
+									"key": "IDSupraveghetor",
+									"value": "1"
+								},
+								{
+									"key": "IDFisa",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/id/5/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								"id",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Patient Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/patients/id/6/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"patients",
+								"id",
+								"6",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Select All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/users/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select User By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/users/id/5/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"users",
+								"id",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select User By Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/users/username/cineva1/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"users",
+								"username",
+								"cineva1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Username",
+									"value": "popescu",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "parola1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/users/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"users",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update An User's Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Username",
+									"value": "cineva2",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "cineva1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/users/id/5/?Username=Gheorghita&Password=Gheorghita",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"users",
+								"id",
+								"5",
+								""
+							],
+							"query": [
+								{
+									"key": "Username",
+									"value": "Gheorghita"
+								},
+								{
+									"key": "Password",
+									"value": "Gheorghita"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete An User Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/users/id/0/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"users",
+								"id",
+								"0",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Senders",
+			"item": [
+				{
+					"name": "Select All Senders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/senders/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"senders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select A Sender By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/senders/id/1/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"senders",
+								"id",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select A Sender By Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/senders/username/popescu/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"senders",
+								"username",
+								"popescu",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select A Sender By Username Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Username",
+									"value": "username1",
+									"type": "text"
+								},
+								{
+									"key": "Type",
+									"value": "ingrijitor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/senders/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"senders",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Sender's Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Username",
+									"value": "username1",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "supraveghetor",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/senders/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"senders",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Sender Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/senders/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"senders",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sensor Data",
+			"item": [
+				{
+					"name": "Select All Sensor Data",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/sensors/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"sensors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Sensor Data By ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/sensors/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"sensors",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Sensor Data Entry",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parolasql2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "dbuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Puls",
+									"value": "70",
+									"type": "text"
+								},
+								{
+									"key": "Lumina",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "Alerta_Proximitate",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Temperatura_Amb",
+									"value": "24.5",
+									"type": "text"
+								},
+								{
+									"key": "Hum_Alert",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "Gas_Alert",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "IDPacient",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/sensors/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"sensors",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Sensor Data Row",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Puls",
+									"value": "70",
+									"type": "text"
+								},
+								{
+									"key": "Lumina",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "Alerta_Proximitate",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Temperatura_Amb",
+									"value": "24.5",
+									"type": "text"
+								},
+								{
+									"key": "Hum_Alert",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "Gas_Alert",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "IDPacient",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/sensors/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"sensors",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Sensor Data Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/sensors/id/2/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"sensors",
+								"id",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Supervisors",
+			"item": [
+				{
+					"name": "Select All Supervisors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/supervisors/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"supervisors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Supervisor By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/supervisors/id/1/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"supervisors",
+								"id",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Supervisor By Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/supervisors/username/Da3/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"supervisors",
+								"username",
+								"Da3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Supervisor Row",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Vasile",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Gheorghe",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "vasile",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/supervisors/create/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"supervisors",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Supervisor's Data",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Nume",
+									"value": "Da",
+									"type": "text"
+								},
+								{
+									"key": "Prenume",
+									"value": "Da2",
+									"type": "text"
+								},
+								{
+									"key": "Username",
+									"value": "Da3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/supervisors/id/3/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"supervisors",
+								"id",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Supervisor Row",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://185.207.251.196:9000/api/supervisors/id/3/",
+							"protocol": "http",
+							"host": [
+								"185",
+								"207",
+								"251",
+								"196"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"supervisors",
+								"id",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
