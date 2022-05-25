@@ -18,7 +18,7 @@ func GetAlerts(w http.ResponseWriter, _ *http.Request) {
 	var elements []Alerte
 	for rows.Next() {
 		var elem Alerte
-		if err := rows.Scan(&elem.IDAlerta, &elem.Gravitate, &elem.Mesaj, &elem.IDSender); err != nil {
+		if err := rows.Scan(&elem.IDAlerta, &elem.Gravitate, &elem.Mesaj, &elem.IDSender, &elem.IDPacient); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -46,7 +46,35 @@ func GetAlertByID(w http.ResponseWriter, r *http.Request) {
 	var elements []Alerte
 	for rows.Next() {
 		var elem Alerte
-		if err := rows.Scan(&elem.IDAlerta, &elem.Gravitate, &elem.Mesaj, &elem.IDSender); err != nil {
+		if err := rows.Scan(&elem.IDAlerta, &elem.Gravitate, &elem.Mesaj, &elem.IDSender, &elem.IDPacient); err != nil {
+			w.Write([]byte("Mare eroare la scanare, boule."))
+		}
+		elements = append(elements, elem)
+	}
+	if err = rows.Err(); err != nil {
+		w.Write([]byte("Mare eroare la scanare, boule."))
+	}
+
+	encoded, err := json.Marshal(elements)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
+func GetAlertByPatientID(w http.ResponseWriter, r *http.Request) {
+	bID := mux.Vars(r)["id"]
+	w.Header().Set("Content-Type", "application/json")
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Alerte WHERE `IDPacient` = '%s'", bID)
+	rows, err := db.Query(selectStringId)
+	if err != nil {
+		panic(err)
+	}
+	var elements []Alerte
+	for rows.Next() {
+		var elem Alerte
+		if err := rows.Scan(&elem.IDAlerta, &elem.Gravitate, &elem.Mesaj, &elem.IDSender, &elem.IDPacient); err != nil {
 			w.Write([]byte("Mare eroare la scanare, boule."))
 		}
 		elements = append(elements, elem)
@@ -68,7 +96,8 @@ func CreateAlert(w http.ResponseWriter, r *http.Request) {
 	bGravitate := r.FormValue("Gravitate")
 	bMesaj := r.FormValue("Mesaj")
 	bIDS := r.FormValue("IDSender")
-	insertStringAlerte := fmt.Sprintf("INSERT INTO medassist_db.Alerte (`Gravitate`,`Mesaj`, `IDSender`) VALUES ('%s', '%s', '%s')", bGravitate, bMesaj, bIDS)
+	bIDPacient := r.FormValue("IDPacient")
+	insertStringAlerte := fmt.Sprintf("INSERT INTO medassist_db.Alerte (`Gravitate`,`Mesaj`, `IDSender`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s')", bGravitate, bMesaj, bIDS, bIDPacient)
 	_, err := db.Exec(insertStringAlerte)
 	if err != nil {
 		panic(err)
@@ -83,12 +112,13 @@ func UpdateAlert(w http.ResponseWriter, r *http.Request) {
 	bGravitate := r.FormValue("Gravitate")
 	bMesaj := r.FormValue("Mesaj")
 	bIDS := r.FormValue("IDSender")
-	updateStringAlerte := fmt.Sprintf("UPDATE medassist_db.Alerte SET `Gravitate` = '%s', `Mesaj` = '%s', `IDSender` = '%s' WHERE `IDAlerta` = '%s'", bGravitate, bMesaj, bIDS, bID)
+	bIDPacient := r.FormValue("IDPacient")
+	updateStringAlerte := fmt.Sprintf("UPDATE medassist_db.Alerte SET `Gravitate` = '%s', `Mesaj` = '%s', `IDSender` = '%s', `IDPacient` = '%s' WHERE `IDAlerta` = '%s'", bGravitate, bMesaj, bIDS, bIDPacient, bID)
 	_, err := db.Exec(updateStringAlerte)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bGravitate, bMesaj, bIDS)
+		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bGravitate, bMesaj, bIDS, bIDPacient)
 	}
 }
 

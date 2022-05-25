@@ -14,6 +14,7 @@ func initializeRouter() {
 	alertHook := r.PathPrefix("/api/alerts").Subrouter()
 	alertHook.HandleFunc("/", GetAlerts).Methods("GET")
 	alertHook.HandleFunc("/id/{id}/", GetAlertByID).Methods("GET")
+	alertHook.HandleFunc("/idpacient/{id}/", GetAlertByPatientID).Methods("GET")
 	alertHook.HandleFunc("/create/", CreateAlert).Methods("POST")
 	alertHook.HandleFunc("/id/{id}/", UpdateAlert).Methods("PUT")
 	alertHook.HandleFunc("/id/{id}/", DeleteAlert).Methods("DELETE")

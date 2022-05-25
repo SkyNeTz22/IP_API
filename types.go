@@ -5,6 +5,7 @@ type Alerte struct {
 	Gravitate int    `json:"Gravitate"`
 	Mesaj     string `json:"Mesaj"`
 	IDSender  int    `json:"IDSender"`
+	IDPacient int    `json:"IDPacient"`
 }
 
 type DateMobile struct {
