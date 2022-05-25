@@ -110,6 +110,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	bID := mux.Vars(r)["id"]
 	bUsername := r.FormValue("Username")
 	bPassword := r.FormValue("Password")
+	bType := r.FormValue("Type")
 	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `Username` = '%s', `Password` = '%s', `Type` = '%s' WHERE IDUser = '%s'", bUsername, bPassword, bType, bID)
 	_, err := db.Exec(updateStringUsers)
 	if err != nil {
