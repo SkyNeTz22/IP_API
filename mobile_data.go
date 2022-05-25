@@ -63,6 +63,34 @@ func GetMobileDataByID(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
+func GetMobileDataByPatientID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateMobile WHERE `IDPacient` = '%s'", bID)
+	rows, err := db.Query(selectStringId)
+	if err != nil {
+		panic(err)
+	}
+	var elements []DateMobile
+	for rows.Next() {
+		var elem DateMobile
+		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune_Mica, &elem.Tensiune_Mare, &elem.Temperatura, &elem.IDPacient); err != nil {
+			w.Write([]byte("A intrat pe if"))
+		}
+		elements = append(elements, elem)
+	}
+	if err = rows.Err(); err != nil {
+		w.Write([]byte("A intrat pe if"))
+	}
+
+	encoded, err := json.Marshal(elements)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
 func InsertMobileData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bData := r.FormValue("Data")
