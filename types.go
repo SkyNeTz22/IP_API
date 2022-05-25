@@ -72,6 +72,7 @@ type Users struct {
 	IDUser   int    `json:"IDUser"`
 	Username string `json:"Username"`
 	Password string `json:"Password"`
+	Type     string `json:"Type"`
 }
 
 type Senders struct {

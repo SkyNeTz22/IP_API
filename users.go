@@ -18,7 +18,7 @@ func GetUsers(w http.ResponseWriter, _ *http.Request) {
 	var elements []Users
 	for rows.Next() {
 		var elem Users
-		if err := rows.Scan(&elem.IDUser, &elem.Username, &elem.Password); err != nil {
+		if err := rows.Scan(&elem.IDUser, &elem.Username, &elem.Password, &elem.Type); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -46,7 +46,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	var elements []Users
 	for rows.Next() {
 		var elem Users
-		if err := rows.Scan(&elem.IDUser, &elem.Username, &elem.Password); err != nil {
+		if err := rows.Scan(&elem.IDUser, &elem.Username, &elem.Password, &elem.Type); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -74,7 +74,7 @@ func GetUserByUsername(w http.ResponseWriter, r *http.Request) {
 	var elements []Users
 	for rows.Next() {
 		var elem Users
-		if err := rows.Scan(&elem.IDUser, &elem.Username, &elem.Password); err != nil {
+		if err := rows.Scan(&elem.IDUser, &elem.Username, &elem.Password, &elem.Type); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -95,7 +95,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bUsername := r.FormValue("Username")
 	bPassword := r.FormValue("Password")
-	insertStringUsers := fmt.Sprintf("INSERT INTO medassist_db.Users (`Username`, `Password`) VALUES ('%s', '%s')", bUsername, bPassword)
+	bType := r.FormValue("Type")
+	insertStringUsers := fmt.Sprintf("INSERT INTO medassist_db.Users (`Username`, `Password`, `Type`) VALUES ('%s', '%s', '%s')", bUsername, bPassword, bType)
 	_, err := db.Exec(insertStringUsers)
 	if err != nil {
 		panic(err)
@@ -109,12 +110,12 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	bID := mux.Vars(r)["id"]
 	bUsername := r.FormValue("Username")
 	bPassword := r.FormValue("Password")
-	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `Username` = '%s', `Password` = '%s' WHERE IDUser = '%s'", bUsername, bPassword, bID)
+	updateStringUsers := fmt.Sprintf("UPDATE medassist_db.Users SET `Username` = '%s', `Password` = '%s', `Type` = '%s' WHERE IDUser = '%s'", bUsername, bPassword, bType, bID)
 	_, err := db.Exec(updateStringUsers)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s' pentru campul cu ID : '%s'", bUsername, bPassword, bID))
+		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s', '%s' pentru campul cu ID : '%s'", bUsername, bPassword, bType, bID))
 	}
 }
 
