@@ -94,19 +94,6 @@ func initializeRouter() {
 	// r.HandleFunc("/api/patients", UpdatePatient).Methods("PUT")
 	// r.HandleFunc("/api/patients/{id}", DeletePatient).Methods("DELETE")
 
-	sensorHook := r.PathPrefix("/api/sensors").Subrouter()
-	sensorHook.HandleFunc("/", GetAllSensorData).Methods("GET")
-	sensorHook.HandleFunc("/id/{id}/", GetSensorDataByID).Methods("GET")
-	sensorHook.HandleFunc("/create/", InsertSensorData).Methods("POST")
-	sensorHook.HandleFunc("/id/{id}/", UpdateSensorData).Methods("PUT")
-	sensorHook.HandleFunc("/id/{id}/", DeleteSensorData).Methods("DELETE")
-
-	// r.HandleFunc("/api/sensors", GetAllSensorData).Methods("GET")
-	// r.HandleFunc("/api/sensors/{id}", GetSensorData).Methods("GET")
-	// r.HandleFunc("/api/sensors", InsertSensorData).Methods("POST")
-	// r.HandleFunc("/api/sensors", UpdateSensorData).Methods("PUT")
-	// r.HandleFunc("/api/sensors/{id}", DeleteSensorData).Methods("DELETE")
-
 	userHook := r.PathPrefix("/api/users").Subrouter()
 	userHook.HandleFunc("/", GetUsers).Methods("GET")
 	userHook.HandleFunc("/id/{id}/", GetUserByID).Methods("GET")
@@ -143,6 +130,20 @@ func initializeRouter() {
 	senderHook.HandleFunc("/create/", CreateSender).Methods("POST")
 	senderHook.HandleFunc("/id/{id}/", UpdateSender).Methods("PUT")
 	senderHook.HandleFunc("/id/{id}/", DeleteSender).Methods("DELETE")
+
+	sensorHook := r.PathPrefix("/api/sensors").Subrouter()
+	sensorHook.HandleFunc("/", GetAllSensorData).Methods("GET")
+	sensorHook.HandleFunc("/id/{id}/", GetSensorDataByID).Methods("GET")
+	sensorHook.HandleFunc("/idpatient/{id}/", GetSensorDataByPatientID).Methods("GET")
+	sensorHook.HandleFunc("/create/", InsertSensorData).Methods("POST")
+	sensorHook.HandleFunc("/id/{id}/", UpdateSensorData).Methods("PUT")
+	sensorHook.HandleFunc("/id/{id}/", DeleteSensorData).Methods("DELETE")
+
+	// r.HandleFunc("/api/sensors", GetAllSensorData).Methods("GET")
+	// r.HandleFunc("/api/sensors/{id}", GetSensorData).Methods("GET")
+	// r.HandleFunc("/api/sensors", InsertSensorData).Methods("POST")
+	// r.HandleFunc("/api/sensors", UpdateSensorData).Methods("PUT")
+	// r.HandleFunc("/api/sensors/{id}", DeleteSensorData).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":9000",
 		handlers.CORS(handlers.AllowedHeaders([]string{

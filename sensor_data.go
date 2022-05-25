@@ -63,6 +63,34 @@ func GetSensorDataByID(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
+func GetSensorDataByPatientID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateSenzori WHERE IDPacient = '%s' ", bID)
+	rows, err := db.Query(selectStringId)
+	if err != nil {
+		panic(err)
+	}
+	var elements []DateSenzori
+	for rows.Next() {
+		var elem DateSenzori
+		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient); err != nil {
+			w.Write([]byte("A intrat pe if"))
+		}
+		elements = append(elements, elem)
+	}
+	if err = rows.Err(); err != nil {
+		w.Write([]byte("A intrat pe if"))
+	}
+
+	encoded, err := json.Marshal(elements)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
 func InsertSensorData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bPuls := r.FormValue("Puls")
