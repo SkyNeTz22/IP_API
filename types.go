@@ -13,7 +13,7 @@ type DateMobile struct {
 	Data                string  `json:"Data"`
 	Greutate            float32 `json:"Greutate"`
 	Glicemie            float32 `json:"Glicemie"`
-	Tensiune_Sistolica  int     `json:"Tensiune"`
+	Tensiune_Sistolica  int     `json:"Tensiune_Sistolica"`
 	Tensiune_Diastolica int     `json:"Tensiune_Diastolica"`
 	Temperatura         float32 `json:"Temperatura"`
 	IDPacient           int     `json:"IDPacient"`
