@@ -117,7 +117,7 @@ func UpdateMobileData(w http.ResponseWriter, r *http.Request) {
 	bTensiune := r.FormValue("Tensiune")
 	bTemperatura := r.FormValue("Temperatura")
 	bIDP := r.FormValue("IDPacient")
-	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiuneMica, bTensiuneMare, bTemperatura, bIDP, bID)
+	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiune, bTemperatura, bIDP, bID)
 	_, err := db.Exec(updateStringDateMobile)
 	if err != nil {
 		panic(err)
