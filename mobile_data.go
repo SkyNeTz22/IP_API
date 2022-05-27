@@ -66,7 +66,7 @@ func GetMobileDataByID(w http.ResponseWriter, r *http.Request) {
 func GetMobileDataByPatientID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
-	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateMobile WHERE `IDPacient` = '%s' ORDER BY `IDPacient` DESC LIMIT 1", bID)
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateMobile WHERE `IDPacient` = '%s' ORDER BY `IDDate` DESC LIMIT 1", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
