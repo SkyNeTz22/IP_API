@@ -9,13 +9,14 @@ type Alerte struct {
 }
 
 type DateMobile struct {
-	IDDate      int     `json:"IDDate"`
-	Data        string  `json:"Data"`
-	Greutate    float32 `json:"Greutate"`
-	Glicemie    float32 `json:"Glicemie"`
-	Tensiune    int     `json:"Tensiune"`
-	Temperatura float32 `json:"Temperatura"`
-	IDPacient   int     `json:"IDPacient"`
+	IDDate              int     `json:"IDDate"`
+	Data                string  `json:"Data"`
+	Greutate            float32 `json:"Greutate"`
+	Glicemie            float32 `json:"Glicemie"`
+	Tensiune_Sistolica  int     `json:"Tensiune"`
+	Tensiune_Diastolica int     `json:"Tensiune_Diastolica"`
+	Temperatura         float32 `json:"Temperatura"`
+	IDPacient           int     `json:"IDPacient"`
 }
 
 type DateSenzori struct {

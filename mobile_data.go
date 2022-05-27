@@ -18,7 +18,7 @@ func GetAllMobileData(w http.ResponseWriter, _ *http.Request) {
 	var elements []DateMobile
 	for rows.Next() {
 		var elem DateMobile
-		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune, &elem.Temperatura, &elem.IDPacient); err != nil {
+		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune_Sistolica, &elem.Tensiune_Diastolica, &elem.Temperatura, &elem.IDPacient); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -46,7 +46,7 @@ func GetMobileDataByID(w http.ResponseWriter, r *http.Request) {
 	var elements []DateMobile
 	for rows.Next() {
 		var elem DateMobile
-		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune, &elem.Temperatura, &elem.IDPacient); err != nil {
+		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune_Sistolica, &elem.Tensiune_Diastolica, &elem.Temperatura, &elem.IDPacient); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -74,7 +74,7 @@ func GetMobileDataByPatientID(w http.ResponseWriter, r *http.Request) {
 	var elements []DateMobile
 	for rows.Next() {
 		var elem DateMobile
-		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune, &elem.Temperatura, &elem.IDPacient); err != nil {
+		if err := rows.Scan(&elem.IDDate, &elem.Data, &elem.Greutate, &elem.Glicemie, &elem.Tensiune_Sistolica, &elem.Tensiune_Diastolica, &elem.Temperatura, &elem.IDPacient); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -96,15 +96,16 @@ func InsertMobileData(w http.ResponseWriter, r *http.Request) {
 	bData := r.FormValue("Data")
 	bGreutate := r.FormValue("Greutate")
 	bGlicemie := r.FormValue("Glicemie")
-	bTensiune := r.FormValue("Tensiune")
+	bTensiuneSistolica := r.FormValue("Tensiune_Sistolica")
+	bTensiuneDiastolica := r.FormValue("Tensiune_Diastolica")
 	bTemperatura := r.FormValue("Temperatura")
 	bIDP := r.FormValue("IDPacient")
-	insertStringDateMobile := fmt.Sprintf("INSERT INTO medassist_db.DateMobile (`Data`, `Greutate`, `Glicemie`, `Tensiune`, `Temperatura`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", bData, bGreutate, bGlicemie, bTensiune, bTemperatura, bIDP)
+	insertStringDateMobile := fmt.Sprintf("INSERT INTO medassist_db.DateMobile (`Data`, `Greutate`, `Glicemie`, `Tensiune`, `Temperatura`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP)
 	_, err := db.Exec(insertStringDateMobile)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bData, bGreutate, bGlicemie, bTensiune, bTemperatura, bIDP)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP)
 	}
 }
 
@@ -114,15 +115,16 @@ func UpdateMobileData(w http.ResponseWriter, r *http.Request) {
 	bData := r.FormValue("Data")
 	bGreutate := r.FormValue("Greutate")
 	bGlicemie := r.FormValue("Glicemie")
-	bTensiune := r.FormValue("Tensiune")
+	bTensiuneSistolica := r.FormValue("Tensiune_Sistolica")
+	bTensiuneDiastolica := r.FormValue("Tensiune_Diastolica")
 	bTemperatura := r.FormValue("Temperatura")
 	bIDP := r.FormValue("IDPacient")
-	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiune, bTemperatura, bIDP, bID)
+	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP, bID)
 	_, err := db.Exec(updateStringDateMobile)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bData, bGreutate, bGlicemie, bTensiune, bTemperatura, bIDP)
+		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP)
 	}
 }
 
