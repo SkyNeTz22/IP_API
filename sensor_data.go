@@ -66,7 +66,7 @@ func GetSensorDataByID(w http.ResponseWriter, r *http.Request) {
 func GetSensorDataByPatientID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
-	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateSenzori WHERE `IDPacient` = '%s'", bID)
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.DateSenzori WHERE `IDPacient` = '%s' ORDER BY IDSenzor DESC LIMIT 1", bID)
 	rows, err := db.Query(selectStringId)
 	if err != nil {
 		panic(err)
