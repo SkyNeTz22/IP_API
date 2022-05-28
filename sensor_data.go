@@ -18,7 +18,7 @@ func GetAllSensorData(w http.ResponseWriter, _ *http.Request) {
 	var elements []DateSenzori
 	for rows.Next() {
 		var elem DateSenzori
-		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient); err != nil {
+		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient, &elem.Data_Introducerii); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -46,7 +46,7 @@ func GetSensorDataByID(w http.ResponseWriter, r *http.Request) {
 	var elements []DateSenzori
 	for rows.Next() {
 		var elem DateSenzori
-		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient); err != nil {
+		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient, &elem.Data_Introducerii); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -74,7 +74,7 @@ func GetSensorDataByPatientID(w http.ResponseWriter, r *http.Request) {
 	var elements []DateSenzori
 	for rows.Next() {
 		var elem DateSenzori
-		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient); err != nil {
+		if err := rows.Scan(&elem.IDSenzor, &elem.Puls, &elem.Lumina, &elem.Alerta_Proximitate, &elem.Temperatura_Amb, &elem.Hum_Alert, &elem.Gas_Alert, &elem.IDPacient, &elem.Data_Introducerii); err != nil {
 			w.Write([]byte("A intrat pe if"))
 		}
 		elements = append(elements, elem)
@@ -100,12 +100,13 @@ func InsertSensorData(w http.ResponseWriter, r *http.Request) {
 	bHumAlert := r.FormValue("Hum_Alert")
 	bGasAlert := r.FormValue("Gas_Alert")
 	bIDP := r.FormValue("IDPacient")
-	insertStringDateSenzori := fmt.Sprintf("INSERT INTO medassist_db.DateSenzori (`Puls`, `Lumina`, `Alerta_Proximitate`, `Temperatura_Amb`, `Hum_Alert`, `Gas_Alert`, `IDPacient`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s')", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP)
+	bDataIntroducerii := r.FormValue("Data_Introducerii")
+	insertStringDateSenzori := fmt.Sprintf("INSERT INTO medassist_db.DateSenzori (`Puls`, `Lumina`, `Alerta_Proximitate`, `Temperatura_Amb`, `Hum_Alert`, `Gas_Alert`, `IDPacient`, `Data_Introducerii`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s')", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii)
 	_, err := db.Exec(insertStringDateSenzori)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii)
 	}
 }
 
@@ -119,12 +120,13 @@ func UpdateSensorData(w http.ResponseWriter, r *http.Request) {
 	bHumAlert := r.FormValue("Hum_Alert")
 	bGasAlert := r.FormValue("Gas_Alert")
 	bIDP := r.FormValue("IDPacient")
-	updateStringDateSenzori := fmt.Sprintf("UPDATE medassist_db.DateSenzori SET `Puls` = '%s', `Lumina` = '%s', `Alerta_Proximitate` = '%s', `Temperatura_Amb` = '%s', `Hum_Alert` = '%s', `Gas_Alert` = '%s', `IDPacient` = '%s' WHERE `IDSenzor` = '%s'", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bID)
+	bDataIntroducerii := r.FormValue("Data_Introducerii")
+	updateStringDateSenzori := fmt.Sprintf("UPDATE medassist_db.DateSenzori SET `Puls` = '%s', `Lumina` = '%s', `Alerta_Proximitate` = '%s', `Temperatura_Amb` = '%s', `Hum_Alert` = '%s', `Gas_Alert` = '%s', `IDPacient` = '%s' WHERE `IDSenzor` = '%s'", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii, bID)
 	_, err := db.Exec(updateStringDateSenzori)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP)
+		fmt.Println("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : ", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii)
 	}
 }
 

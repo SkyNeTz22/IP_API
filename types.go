@@ -28,6 +28,7 @@ type DateSenzori struct {
 	Hum_Alert          int8    `json:"Hum_Alert"`
 	Gas_Alert          int8    `json:"Gas_Alert"`
 	IDPacient          int     `json:"IDPacient"`
+	Data_Introducerii  string  `json:"Data_Introducerii"`
 }
 
 type FisaMed struct {
