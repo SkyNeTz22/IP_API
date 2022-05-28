@@ -101,7 +101,7 @@ func InsertSensorData(w http.ResponseWriter, r *http.Request) {
 	bGasAlert := r.FormValue("Gas_Alert")
 	bIDP := r.FormValue("IDPacient")
 	bDataIntroducerii := r.FormValue("Data_Introducerii")
-	insertStringDateSenzori := fmt.Sprintf("INSERT INTO medassist_db.DateSenzori (`Puls`, `Lumina`, `Alerta_Proximitate`, `Temperatura_Amb`, `Hum_Alert`, `Gas_Alert`, `IDPacient`, `Data_Introducerii`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s')", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii)
+	insertStringDateSenzori := fmt.Sprintf("INSERT INTO medassist_db.DateSenzori (`Puls`, `Lumina`, `Alerta_Proximitate`, `Temperatura_Amb`, `Hum_Alert`, `Gas_Alert`, `IDPacient`, `Data_Introducerii`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii)
 	_, err := db.Exec(insertStringDateSenzori)
 	if err != nil {
 		panic(err)
@@ -121,7 +121,7 @@ func UpdateSensorData(w http.ResponseWriter, r *http.Request) {
 	bGasAlert := r.FormValue("Gas_Alert")
 	bIDP := r.FormValue("IDPacient")
 	bDataIntroducerii := r.FormValue("Data_Introducerii")
-	updateStringDateSenzori := fmt.Sprintf("UPDATE medassist_db.DateSenzori SET `Puls` = '%s', `Lumina` = '%s', `Alerta_Proximitate` = '%s', `Temperatura_Amb` = '%s', `Hum_Alert` = '%s', `Gas_Alert` = '%s', `IDPacient` = '%s' WHERE `IDSenzor` = '%s'", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii, bID)
+	updateStringDateSenzori := fmt.Sprintf("UPDATE medassist_db.DateSenzori SET `Puls` = '%s', `Lumina` = '%s', `Alerta_Proximitate` = '%s', `Temperatura_Amb` = '%s', `Hum_Alert` = '%s', `Gas_Alert` = '%s', `IDPacient` = '%s', `Data_Introducerii` = '%s' WHERE `IDSenzor` = '%s'", bPuls, bLumina, bAlertaProximitate, bTemperaturaAmb, bHumAlert, bGasAlert, bIDP, bDataIntroducerii, bID)
 	_, err := db.Exec(updateStringDateSenzori)
 	if err != nil {
 		panic(err)
