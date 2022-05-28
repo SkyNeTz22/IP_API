@@ -18,7 +18,7 @@ func GetMedicalFiles(w http.ResponseWriter, _ *http.Request) {
 	var elements []FisaMed
 	for rows.Next() {
 		var elem FisaMed
-		if err := rows.Scan(&elem.IDFisa, &elem.Istoric_Medical, &elem.Lista_Alergii, &elem.Recomandari, &elem.Schema_Medicatie); err != nil {
+		if err := rows.Scan(&elem.IDFisa, &elem.Istoric_Medical, &elem.Lista_Alergii, &elem.Recomandari, &elem.Schema_Medicatie, &elem.IDPacient); err != nil {
 			fmt.Println(err)
 		}
 		elements = append(elements, elem)
@@ -46,7 +46,35 @@ func GetMedicalFileByID(w http.ResponseWriter, r *http.Request) {
 	var elements []FisaMed
 	for rows.Next() {
 		var elem FisaMed
-		if err := rows.Scan(&elem.IDFisa, &elem.Istoric_Medical, &elem.Lista_Alergii, &elem.Recomandari, &elem.Schema_Medicatie); err != nil {
+		if err := rows.Scan(&elem.IDFisa, &elem.Istoric_Medical, &elem.Lista_Alergii, &elem.Recomandari, &elem.Schema_Medicatie, &elem.IDPacient); err != nil {
+			fmt.Println(err)
+		}
+		elements = append(elements, elem)
+	}
+	if err = rows.Err(); err != nil {
+		fmt.Println(err)
+	}
+
+	encoded, err := json.Marshal(elements)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
+func GetMedicalFileByPatientID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.FisaMed WHERE `IDPacient` = '%s'", bID)
+	rows, err := db.Query(selectStringId)
+	if err != nil {
+		panic(err)
+	}
+	var elements []FisaMed
+	for rows.Next() {
+		var elem FisaMed
+		if err := rows.Scan(&elem.IDFisa, &elem.Istoric_Medical, &elem.Lista_Alergii, &elem.Recomandari, &elem.Schema_Medicatie, &elem.IDPacient); err != nil {
 			fmt.Println(err)
 		}
 		elements = append(elements, elem)
@@ -69,12 +97,13 @@ func CreateMedicalFile(w http.ResponseWriter, r *http.Request) {
 	bListaAlergii := r.FormValue("Lista_Alergii")
 	bRecomandari := r.FormValue("Recomandari")
 	bSchemaMedicatie := r.FormValue("Schema_Medicatie")
-	insertStringFisaMed := fmt.Sprintf("INSERT INTO medassist_db.FisaMed (`Istoric_Medical`, `Lista_Alergii`, `Recomandari`, `Schema_Medicatie`) VALUES ('%s', '%s', '%s', '%s')", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
+	bIDPatient := r.FormValue("IDPacient")
+	insertStringFisaMed := fmt.Sprintf("INSERT INTO medassist_db.FisaMed (`Istoric_Medical`, `Lista_Alergii`, `Recomandari`, `Schema_Medicatie`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s')", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bIDPatient)
 	_, err := db.Exec(insertStringFisaMed)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie)
+		fmt.Println("Inserarea s-a efectuat cu succes! Urmatoarele variabile au fost inserate : ", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bIDPatient)
 	}
 }
 
@@ -85,12 +114,13 @@ func UpdateMedicalFile(w http.ResponseWriter, r *http.Request) {
 	bListaAlergii := r.FormValue("Lista_Alergii")
 	bRecomandari := r.FormValue("Recomandari")
 	bSchemaMedicatie := r.FormValue("Schema_Medicatie")
-	updateStringFisaMed := fmt.Sprintf("UPDATE medassist_db.FisaMed SET `Istoric_Medical` = '%s', `Lista_Alergii` = '%s', `Recomandari` = '%s', `Schema_Medicatie` = '%s' WHERE `IDFisa` = '%s'", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bID)
+	bIDPatient := r.FormValue("IDPacient")
+	updateStringFisaMed := fmt.Sprintf("UPDATE medassist_db.FisaMed SET `Istoric_Medical` = '%s', `Lista_Alergii` = '%s', `Recomandari` = '%s', `Schema_Medicatie` = '%s', `IDPacient` = '%s' WHERE `IDFisa` = '%s'", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bIDPatient, bID)
 	_, err := db.Exec(updateStringFisaMed)
 	if err != nil {
 		panic(err)
 	} else {
-		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s', '%s' pentru campul cu ID : '%s'", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bID))
+		fmt.Println(fmt.Sprintf("Actualizarea s-a efectuat cu succes! Urmatoarele date au fost actualizate : '%s' , '%s', '%s', '%s' pentru campul cu ID : '%s'", bIstoricMedical, bListaAlergii, bRecomandari, bSchemaMedicatie, bIDPatient, bID))
 	}
 }
 

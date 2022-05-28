@@ -37,6 +37,7 @@ type FisaMed struct {
 	Lista_Alergii    string `json:"Lista_Alergii"`
 	Recomandari      string `json:"Recomandari"`
 	Schema_Medicatie string `json:"Schema_Medicatie"`
+	IDPacient        int    `json:"IDPacient"`
 }
 
 type Ingrijitori struct {
