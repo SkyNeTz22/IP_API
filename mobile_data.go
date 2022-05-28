@@ -100,7 +100,7 @@ func InsertMobileData(w http.ResponseWriter, r *http.Request) {
 	bTensiuneDiastolica := r.FormValue("Tensiune_Diastolica")
 	bTemperatura := r.FormValue("Temperatura")
 	bIDP := r.FormValue("IDPacient")
-	insertStringDateMobile := fmt.Sprintf("INSERT INTO medassist_db.DateMobile (`Data`, `Greutate`, `Glicemie`, `Tensiune`, `Temperatura`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP)
+	insertStringDateMobile := fmt.Sprintf("INSERT INTO medassist_db.DateMobile (`Data`, `Greutate`, `Glicemie`, `Tensiune_Sistolica`, `Tensiune_Diastolica`, `Temperatura`, `IDPacient`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP)
 	_, err := db.Exec(insertStringDateMobile)
 	if err != nil {
 		panic(err)
@@ -119,7 +119,7 @@ func UpdateMobileData(w http.ResponseWriter, r *http.Request) {
 	bTensiuneDiastolica := r.FormValue("Tensiune_Diastolica")
 	bTemperatura := r.FormValue("Temperatura")
 	bIDP := r.FormValue("IDPacient")
-	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP, bID)
+	updateStringDateMobile := fmt.Sprintf("UPDATE medassist_db.DateMobile SET `Data` = '%s', `Greutate` = '%s', `Glicemie` = '%s', `Tensiune_Sistolica` = '%s', `Tensiune_Diastolica` = '%s', `Temperatura` = '%s', `IDPacient` = '%s' WHERE `IDDate` = '%s'", bData, bGreutate, bGlicemie, bTensiuneSistolica, bTensiuneDiastolica, bTemperatura, bIDP, bID)
 	_, err := db.Exec(updateStringDateMobile)
 	if err != nil {
 		panic(err)
