@@ -119,6 +119,33 @@ func GetPatientByMedicID(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
+func GetLastPatient(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	selectStringId := fmt.Sprintf("SELECT * FROM medassist_db.Pacienti ORDER BY `IDPacient` DESC LIMIT 1")
+	rows, err := db.Query(selectStringId)
+	if err != nil {
+		panic(err)
+	}
+	var elements []Pacienti
+	for rows.Next() {
+		var elem Pacienti
+		if err := rows.Scan(&elem.IDPacient, &elem.Nume, &elem.Prenume, &elem.Varsta, &elem.Adresa, &elem.NrTel, &elem.Mail, &elem.Profesia, &elem.LocDeMunca, &elem.Username, &elem.IDMedic, &elem.IDIngrijitor, &elem.IDSupraveghetor, &elem.IDFisa); err != nil {
+			w.Write([]byte("A intrat pe if"))
+		}
+		elements = append(elements, elem)
+	}
+	if err = rows.Err(); err != nil {
+		w.Write([]byte("A intrat pe if"))
+	}
+
+	encoded, err := json.Marshal(elements)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
 func GetPatientBySupervisorID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]

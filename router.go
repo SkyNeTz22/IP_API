@@ -84,6 +84,7 @@ func initializeRouter() {
 
 	patientHook := r.PathPrefix("/api/patients").Subrouter()
 	patientHook.HandleFunc("/", GetPatients).Methods("GET")
+	patientHook.HandleFunc("/lastpatient/", GetLastPatient).Methods("GET")
 	patientHook.HandleFunc("/id/{id}/", GetPatientByID).Methods("GET")
 	patientHook.HandleFunc("/idcaretaker/{id}/", GetPatientByCaretakerID).Methods("GET")
 	patientHook.HandleFunc("/idmedic/{id}/", GetPatientByMedicID).Methods("GET")
