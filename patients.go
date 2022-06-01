@@ -253,6 +253,7 @@ func GetNumberOfCaretakers(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreatePatient(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	bNume := r.FormValue("Nume")
 	bPrenume := r.FormValue("Prenume")
