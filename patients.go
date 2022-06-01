@@ -202,7 +202,7 @@ func GetPatientByUsername(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
-func GetNumberOfSupervisors() {
+func GetNumberOfSupervisors(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
 	selectStringUsername := fmt.Sprintf("SELECT COUNT(IDSupraveghetor) FROM Pacienti WHERE `IDMedic` = '%s'", bID)
