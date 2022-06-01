@@ -227,6 +227,31 @@ func GetNumberOfSupervisors(w http.ResponseWriter, r *http.Request) {
 	w.Write(encoded)
 }
 
+func GetNumberOfCaretakers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
+	selectStringUsername := fmt.Sprintf("SELECT COUNT(IDIngrijitor) FROM Pacienti WHERE `IDMedic` = '%s'", bID)
+	rows, err := db.Query(selectStringUsername)
+
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var count int
+	for rows.Next() {
+		if err := rows.Scan(&count); err != nil {
+			fmt.Print("A intrat pe if")
+		}
+	}
+	encoded, err := json.Marshal(count)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
 func CreatePatient(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bNume := r.FormValue("Nume")

@@ -91,6 +91,7 @@ func initializeRouter() {
 	patientHook.HandleFunc("/idsupervisor/{id}/", GetPatientBySupervisorID).Methods("GET")
 	patientHook.HandleFunc("/username/{username}/", GetPatientByUsername).Methods("GET")
 	patientHook.HandleFunc("/countsupervisors/{id}/", GetNumberOfSupervisors).Methods("GET")
+	patientHook.HandleFunc("/countcaretakers/{id}/", GetNumberOfCaretakers).Methods("GET")
 	patientHook.HandleFunc("/create/", CreatePatient).Methods("POST")
 	patientHook.HandleFunc("/id/{id}/", UpdatePatient).Methods("PUT")
 	patientHook.HandleFunc("/id/{id}/", DeletePatient).Methods("DELETE")
