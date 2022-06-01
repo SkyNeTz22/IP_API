@@ -35,6 +35,31 @@ func GetSupervisors(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
+func GetPatientsCountSupervisors(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
+	selectString := fmt.Sprintf("select COUNT(IDPacient) FROM Pacienti WHERE `IDSupraveghetor` = '%s'", bID)
+	rows, err := db.Query(selectString)
+
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var count int
+	for rows.Next() {
+		if err := rows.Scan(&count); err != nil {
+			fmt.Print("A intrat pe if")
+		}
+	}
+	encoded, err := json.Marshal(count)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
 func GetSupervisorByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
