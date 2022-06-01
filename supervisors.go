@@ -38,7 +38,7 @@ func GetSupervisors(w http.ResponseWriter, _ *http.Request) {
 func GetPatientsCountSupervisors(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
-	selectString := fmt.Sprintf("SELECT COUNT(IDPacient), IDSupraveghetor FROM Pacienti WHERE `IDSupraveghetor` = '%s'", bID)
+	selectString := fmt.Sprintf("SELECT COUNT(IDPacient) FROM Pacienti WHERE `IDSupraveghetor` = '%s'", bID)
 	rows, err := db.Query(selectString)
 
 	if err != nil {

@@ -38,7 +38,7 @@ func GetCaretakers(w http.ResponseWriter, _ *http.Request) {
 func GetPatientsCountCaretakers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	bID := mux.Vars(r)["id"]
-	selectStringUsername := fmt.Sprintf("select COUNT(IDPacient), IDIngrijitor FROM Pacienti WHERE `IDIngrijitor` = '%s'", bID)
+	selectStringUsername := fmt.Sprintf("select COUNT(IDPacient) FROM Pacienti WHERE `IDIngrijitor` = '%s'", bID)
 	rows, err := db.Query(selectStringUsername)
 
 	if err != nil {
