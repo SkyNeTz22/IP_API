@@ -43,6 +43,7 @@ func initializeRouter() {
 	caretakerHook.HandleFunc("/", GetCaretakers).Methods("GET")
 	caretakerHook.HandleFunc("/id/{id}/", GetCaretakerByID).Methods("GET")
 	caretakerHook.HandleFunc("/username/{username}/", GetCaretakerByUsername).Methods("GET")
+	caretakerHook.HandleFunc("/patientscount/{id}/", GetPatientsCount).Methods("GET")
 	caretakerHook.HandleFunc("/create/", CreateCaretaker).Methods("POST")
 	caretakerHook.HandleFunc("/id/{id}/", UpdateCaretaker).Methods("PUT")
 	caretakerHook.HandleFunc("/id/{id}/", DeleteCaretaker).Methods("DELETE")

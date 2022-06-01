@@ -35,6 +35,31 @@ func GetCaretakers(w http.ResponseWriter, _ *http.Request) {
 	w.Write(encoded)
 }
 
+func GetPatientsCount(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	bID := mux.Vars(r)["id"]
+	selectStringUsername := fmt.Sprintf("select COUNT(IDPacient) FROM Pacienti WHERE `IDIngrijitor` = '%s'", bID)
+	rows, err := db.Query(selectStringUsername)
+
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var count int
+	for rows.Next() {
+		if err := rows.Scan(&count); err != nil {
+			fmt.Print("A intrat pe if")
+		}
+	}
+	encoded, err := json.Marshal(count)
+	if err != nil {
+		panic(err)
+	}
+
+	w.Write(encoded)
+}
+
 func GetCaretakerByID(w http.ResponseWriter, r *http.Request) {
 	bID := mux.Vars(r)["id"]
 	w.Header().Set("Content-Type", "application/json")
