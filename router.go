@@ -122,7 +122,7 @@ func initializeRouter() {
 	supervisorHook.HandleFunc("/", GetSupervisors).Methods("GET")
 	supervisorHook.HandleFunc("/id/{id}/", GetSupervisorByID).Methods("GET")
 	supervisorHook.HandleFunc("/username/{username}/", GetSupervisorByUsername).Methods("GET")
-	caretakerHook.HandleFunc("/patientscount/{id}/", GetPatientsCountSupervisors).Methods("GET")
+	supervisorHook.HandleFunc("/patientscount/{id}/", GetPatientsCountSupervisors).Methods("GET")
 	supervisorHook.HandleFunc("/create/", CreateSupervisor).Methods("POST")
 	supervisorHook.HandleFunc("/id/{id}/", UpdateSupervisor).Methods("PUT")
 	supervisorHook.HandleFunc("/id/{id}/", DeleteSupervisor).Methods("DELETE")
